@@ -2,13 +2,15 @@
   "name": "@jimjardland/nhl",
   "version": "1.0.1",
   "description": "",
-  "main": "build/lib/index.js",
+  "main": "dist/lib/index.js",
   "scripts": {
-    "start": "tsc && node build/lib/index.js",
+    "start": "tsc && node dist/lib/index.js",
     "test": "jest --watchAll"
   },
+  "types": "dist/index.d.ts",
   "keywords": [],
   "author": "",
+  "prepublish": "tsc",
   "license": "ISC",
   "jest": {
     "transform": {

@@ -2,8 +2,9 @@
   "compilerOptions": {
     "lib": ["es6", "dom", "esnext"],
     "resolveJsonModule": true,
-    "outDir": "build",
+    "outDir": "dist",
     "rootDir": "./",
+    "declaration": true,
     "baseUrl": "."
   },
   "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"],
