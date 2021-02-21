@@ -1,0 +1,42 @@
+{
+  "name": "nhl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/lib/index.js",
+  "scripts": {
+    "start": "tsc && node build/lib/index.js",
+    "test": "jest --watchAll"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "ts-jest"
+    },
+    "testPathIgnorePatterns": [
+      "__fixtures__"
+    ],
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ]
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "prettier": "^2.2.1",
+    "ts-jest": "^26.5.1",
+    "ts-node": "^9.1.1",
+    "tslint": "^6.1.3",
+    "typescript": "^4.1.5"
+  },
+  "dependencies": {
+    "got": "^9.6.0",
+    "jest": "^26.6.3",
+    "moment": "^2.29.1",
+    "query-string": "^6.14.0"
+  }
+}
