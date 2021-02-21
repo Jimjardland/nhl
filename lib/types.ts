@@ -6,6 +6,11 @@ export type PlayerInfo = {
   personInfo: PersonInfo
 }
 
+export type Highlights = {
+  day: string
+  games: Game[]
+}
+
 export type PersonInfo = {
   id: number
   primaryNumber: number

@@ -2,8 +2,9 @@ import * as got from 'got'
 import * as moment from 'moment'
 import * as queryString from 'query-string'
 import { formatGames } from './highlights'
+import { Highlights } from './types'
 
-export const getHighlights = async (from?, to?) => {
+export const getHighlights = async (from?, to?): Promise<Highlights> => {
   const params = {
     startDate: from || moment().subtract(1, 'days').format('YYYY-MM-DD'),
     endDate: to || moment().format('YYYY-MM-DD'),

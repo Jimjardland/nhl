@@ -33,7 +33,7 @@ const getPersonInfo = (roster: any): PersonInfo[] =>
     captain: person.captain,
   }))
 
-export const formatGames = (games): Game => {
+export const formatGames = (games): Game[] => {
   return games.map((game) => {
     const personInfo = getPersonInfo([
       ...game.teams.home.team.roster.roster,
@@ -54,7 +54,7 @@ export const formatGames = (games): Game => {
       requiredOvertime:
         gameIsFinished && game.linescore.currentPeriodOrdinal !== '3rd',
       url: getHighlightsUrl(game.content.media.epg),
-      // stars: getStars(game.decisions, personInfo),
+      stars: getStars(game.decisions, personInfo),
       scorers: getScorers(game.scoringPlays, homeTeam?.id, personInfo),
     }
   })
