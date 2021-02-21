@@ -1,5 +1,5 @@
 {
-  "name": "nhl",
+  "name": "@jimjardland/nhl",
   "version": "1.0.0",
   "description": "",
   "main": "build/lib/index.js",
