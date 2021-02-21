@@ -7,7 +7,7 @@
     "start": "tsc && node dist/lib/index.js",
     "test": "jest --watchAll"
   },
-  "types": "dist/index.d.ts",
+  "types": "dist/lib/index.d.ts",
   "keywords": [],
   "author": "",
   "prepublish": "tsc",
