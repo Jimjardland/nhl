@@ -1,13 +1,12 @@
-import fetch from 'node-fetch'
-import * as moment from 'moment'
-import * as queryString from 'query-string'
-import { formatGames } from './highlights'
+import moment from 'moment'
+import queryString from 'query-string'
 import { Highlights } from './types'
+import { formatGames } from './highlights'
 
-export const getHighlights = async (from?, to?): Promise<Highlights> => {
+export const getHighlights = async (): Promise<Highlights[]> => {
   const params = {
-    startDate: from || moment().subtract(1, 'days').format('YYYY-MM-DD'),
-    endDate: to || moment().format('YYYY-MM-DD'),
+    startDate: moment().subtract(1, 'days').format('YYYY-MM-DD'),
+    endDate: moment().format('YYYY-MM-DD'),
     leaderCategories: 'points,goals,assists',
     leaderGameTypes: 'R',
     expand:
@@ -21,7 +20,9 @@ export const getHighlights = async (from?, to?): Promise<Highlights> => {
   const response = await fetch(url)
   const gameData = await response.json()
 
-  return gameData.dates.map((gameDay) => {
+  console.log('gamedata', gameData)
+
+  return gameData?.dates.map((gameDay) => {
     return {
       day: moment(gameDay.date).format('dddd MMMM Do YYYY'),
       games: formatGames(gameDay.games),
