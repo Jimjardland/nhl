@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/lib/index.js",
   "scripts": {
-    "start": "tsc && node dist/lib/index.js",
+    "start": "rimraf dist && tsc && node dist/lib/index.js",
     "test": "jest --watchAll"
   },
   "types": "dist/lib/index.d.ts",
@@ -30,6 +30,7 @@
   "devDependencies": {
     "@types/jest": "^26.0.20",
     "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
     "ts-jest": "^26.5.1",
     "ts-node": "^9.1.1",
     "tslint": "^6.1.3",

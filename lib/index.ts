@@ -1,7 +1,8 @@
-import moment from 'moment'
-import queryString from 'query-string'
+import * as moment from 'moment'
+import * as queryString from 'query-string'
 import { Highlights } from './types'
 import { formatGames } from './highlights'
+import fetch from 'node-fetch'
 
 export const getHighlights = async (): Promise<Highlights[]> => {
   const params = {
