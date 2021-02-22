@@ -1,4 +1,4 @@
-import got from 'got'
+import fetch from 'node-fetch'
 import * as moment from 'moment'
 import * as queryString from 'query-string'
 import { formatGames } from './highlights'
@@ -18,10 +18,8 @@ export const getHighlights = async (from?, to?): Promise<Highlights> => {
     params
   )}`
 
-  const { body: gameData }: any = await got(url, {
-    responseType: 'json',
-    headers: { 'Content-type': 'application/json' },
-  })
+  const response = await fetch(url)
+  const gameData = await response.json()
 
   return gameData.dates.map((gameDay) => {
     return {
@@ -30,10 +28,3 @@ export const getHighlights = async (from?, to?): Promise<Highlights> => {
     }
   })
 }
-
-async function abba() {
-  const d = await getHighlights()
-  console.log(d)
-}
-
-abba()
