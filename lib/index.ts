@@ -1,4 +1,4 @@
-import * as got from 'got'
+import got from 'got'
 import * as moment from 'moment'
 import * as queryString from 'query-string'
 import { formatGames } from './highlights'
@@ -18,8 +18,8 @@ export const getHighlights = async (from?, to?): Promise<Highlights> => {
     params
   )}`
 
-  const { body: gameData } = await got(url, {
-    json: true,
+  const { body: gameData }: any = await got(url, {
+    responseType: 'json',
     headers: { 'Content-type': 'application/json' },
   })
 
@@ -30,3 +30,10 @@ export const getHighlights = async (from?, to?): Promise<Highlights> => {
     }
   })
 }
+
+async function abba() {
+  const d = await getHighlights()
+  console.log(d)
+}
+
+abba()
