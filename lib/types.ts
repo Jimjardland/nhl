@@ -11,6 +11,13 @@ export type Highlights = {
   games: Game[]
 }
 
+export type Playbacks = {
+  name: string
+  width?: string
+  height?: string
+  url: string
+}
+
 export type PersonInfo = {
   id: number
   primaryNumber: number

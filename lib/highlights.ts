@@ -53,9 +53,9 @@ export const formatGames = (games): Game[] => {
       gameIsFinished,
       requiredOvertime:
         gameIsFinished && game.linescore.currentPeriodOrdinal !== '3rd',
-      url: getHighlightsUrl(game.content.media.epg),
       stars: getStars(game.decisions, personInfo),
       scorers: getScorers(game.scoringPlays, homeTeam?.id, personInfo),
+      ...getHighlightsUrl(game.content.media.epg),
     }
   })
 }
@@ -120,7 +120,12 @@ const getScorers = (
   })
 }
 
-export const getHighlightsUrl = (epgs: Epg[]): String => {
+export const getHighlightsUrl = (
+  epgs: Epg[]
+): {
+  url: string
+  videoId: string
+} => {
   let videoId
   for (let i = 0; i < epgs.length; i++) {
     const epg = epgs[i]
@@ -136,7 +141,11 @@ export const getHighlightsUrl = (epgs: Epg[]): String => {
       }
     }
   }
-  return videoId
-    ? `https://www.nhl.com/video/embed/c-${videoId}&autoplay=true`
-    : null
+
+  return {
+    videoId,
+    url: videoId
+      ? `https://www.nhl.com/video/embed/c-${videoId}&autoplay=true`
+      : null,
+  }
 }

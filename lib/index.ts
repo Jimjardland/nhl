@@ -1,6 +1,6 @@
 import * as moment from 'moment'
 import * as queryString from 'query-string'
-import { Highlights } from './types'
+import { Highlights, Playbacks } from './types'
 import { formatGames } from './highlights'
 import fetch from 'node-fetch'
 
@@ -21,12 +21,18 @@ export const getHighlights = async (): Promise<Highlights[]> => {
   const response = await fetch(url)
   const gameData = await response.json()
 
-  console.log('gamedata', gameData)
-
   return gameData?.dates.map((gameDay) => {
     return {
       day: moment(gameDay.date).format('dddd MMMM Do YYYY'),
       games: formatGames(gameDay.games),
     }
   })
+}
+
+export const getVideoUrls = async (id): Promise<Playbacks> => {
+  const url = `https://cms.nhl.bamgrid.com/nhlNR/id/v1/${id}/details/web-v1.json`
+  const response = await fetch(url)
+  const videoUrlData = await response.json()
+
+  return videoUrlData.playbacks
 }
