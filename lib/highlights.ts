@@ -3,7 +3,7 @@ import { Game, PlayerInfo, Goal, PersonInfo } from './types'
 const getImageUrl = (id: number): String =>
   `http://nhl.bamcontent.com/images/headshots/current/60x60/${id}@2x.jpg`
 
-const findPersonInfo = (id: Number, personInfo: PersonInfo[]): PersonInfo =>
+const findPersonInfo = (id: number, personInfo: PersonInfo[]): PersonInfo =>
   personInfo.find((person) => person?.id === id)
 
 interface Item {
@@ -60,28 +60,26 @@ export const formatGames = (games): Game[] => {
   })
 }
 
-const getStars = (
-  { firstStar = {}, secondStar = {}, thirdStar = {} }: any,
-  roster: PersonInfo[]
-): PlayerInfo[] => {
+const getStars = (stars: any, roster: PersonInfo[]): PlayerInfo[] => {
+  if (!stars) return []
   return [
     {
-      ...firstStar,
+      ...stars.firstStar,
       position: 1,
-      image: getImageUrl(firstStar?.id),
-      personInfo: findPersonInfo(firstStar?.id, roster),
+      image: getImageUrl(stars.firstStar?.id),
+      personInfo: findPersonInfo(stars.firstStar?.id, roster),
     },
     {
-      ...secondStar,
+      ...stars.secondStar,
       position: 2,
-      image: getImageUrl(secondStar?.id),
-      personInfo: findPersonInfo(secondStar?.id, roster),
+      image: getImageUrl(stars.secondStar?.id),
+      personInfo: findPersonInfo(stars.secondStar?.id, roster),
     },
     {
-      ...thirdStar,
+      ...stars.thirdStar,
       position: 3,
-      image: getImageUrl(thirdStar?.id),
-      personInfo: findPersonInfo(thirdStar?.id, roster),
+      image: getImageUrl(stars.thirdStar?.id),
+      personInfo: findPersonInfo(stars.thirdStar?.id, roster),
     },
   ]
 }

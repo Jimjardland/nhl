@@ -4,10 +4,13 @@ import { Highlights, Playbacks } from './types'
 import { formatGames } from './highlights'
 import fetch from 'node-fetch'
 
-export const getHighlights = async (): Promise<Highlights[]> => {
+export const getHighlights = async (
+  startDate?: string,
+  endDate?: string
+): Promise<Highlights[]> => {
   const params = {
-    startDate: moment().subtract(1, 'days').format('YYYY-MM-DD'),
-    endDate: moment().format('YYYY-MM-DD'),
+    startDate: moment().subtract(1, 'days').format('YYYY-MM-DD') || startDate,
+    endDate: moment().format('YYYY-MM-DD') || endDate,
     leaderCategories: 'points,goals,assists',
     leaderGameTypes: 'R',
     expand:
@@ -21,12 +24,14 @@ export const getHighlights = async (): Promise<Highlights[]> => {
   const response = await fetch(url)
   const gameData = await response.json()
 
-  return gameData?.dates.map((gameDay) => {
+  const highlights = gameData?.dates.map((gameDay) => {
     return {
       day: moment(gameDay.date).format('dddd MMMM Do YYYY'),
       games: formatGames(gameDay.games),
     }
   })
+
+  return highlights
 }
 
 export const getVideoUrls = async (id): Promise<Playbacks> => {
