@@ -33,11 +33,3 @@ export const getHighlights = async (
 
   return highlights
 }
-
-export const getVideoUrls = async (id): Promise<Playbacks> => {
-  const url = `https://cms.nhl.bamgrid.com/nhlNR/id/v1/${id}/details/web-v1.json`
-  const response = await fetch(url)
-  const videoUrlData = await response.json()
-
-  return videoUrlData.playbacks
-}

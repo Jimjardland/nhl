@@ -1,4 +1,4 @@
-import { Game, PlayerInfo, Goal, PersonInfo } from './types'
+import { Game, PlayerInfo, Goal, PersonInfo, Playbacks } from './types'
 
 const getImageUrl = (id: number): String =>
   `http://nhl.bamcontent.com/images/headshots/current/60x60/${id}@2x.jpg`
@@ -17,6 +17,7 @@ interface Item {
   freeGame: Boolean
   feedName: String
   gamePlus: Boolean
+  playbacks: Playbacks[]
 }
 
 interface Epg {
@@ -55,7 +56,7 @@ export const formatGames = (games): Game[] => {
         gameIsFinished && game.linescore.currentPeriodOrdinal !== '3rd',
       stars: getStars(game.decisions, personInfo),
       scorers: getScorers(game.scoringPlays, homeTeam?.id, personInfo),
-      ...getHighlightsUrl(game.content.media.epg),
+      url: getHighlightsUrl(game.content.media.epg),
     }
   })
 }
@@ -118,32 +119,19 @@ const getScorers = (
   })
 }
 
-export const getHighlightsUrl = (
-  epgs: Epg[]
-): {
-  url: string
-  videoId: string
-} => {
-  let videoId
-  for (let i = 0; i < epgs.length; i++) {
-    const epg = epgs[i]
+export const getHighlightsUrl = (epgs: Epg[]): string => {
+  const [extendedHighlights] = epgs.filter(
+    (x) => x.title === 'Extended Highlights'
+  )
 
-    if (epg.items.length) {
-      switch (epg.title) {
-        case 'Recap':
-          videoId = epg.items[0].mediaPlaybackId || false
-          break
-        case 'Extended Highlights':
-          videoId = epg.items[0].mediaPlaybackId || false
-          break
-      }
-    }
+  if (extendedHighlights.items) {
+    const [item] = extendedHighlights.items
+
+    const [playback] =
+      item?.playbacks.filter((a) => a.name === 'HTTP_CLOUD_MOBILE') || []
+
+    return playback?.url
   }
 
-  return {
-    videoId,
-    url: videoId
-      ? `https://www.nhl.com/video/embed/c-${videoId}&autoplay=true`
-      : null,
-  }
+  return null
 }
