@@ -58,3 +58,23 @@ export type Game = {
   stars: [PlayerInfo]
   scorers: [Goal]
 }
+
+export interface Item {
+  guid: String
+  mediastate: String
+  mediaPlaybackId: String
+  mediaFeedType: String
+  callLetters: String
+  eventId: String
+  language: String
+  freeGame: Boolean
+  feedName: String
+  gamePlus: Boolean
+  playbacks: Playbacks[]
+}
+
+export interface Epg {
+  title: String
+  platform: String
+  items: Item[]
+}

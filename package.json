@@ -5,12 +5,13 @@
   "main": "dist/lib/index.js",
   "scripts": {
     "start": "rimraf dist && tsc && node dist/lib/index.js",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "build": "rimraf dist && tsc"
   },
   "types": "dist/lib/index.d.ts",
   "keywords": [],
   "author": "",
-  "prepublish": "tsc",
+  "prepublish": "rimraf dist && tsc",
   "license": "ISC",
   "jest": {
     "transform": {
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.20",
+    "jest": "^26.6.3",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.5.1",
@@ -37,8 +39,6 @@
     "typescript": "^4.1.5"
   },
   "dependencies": {
-    "got": "^11.8.1",
-    "jest": "^26.6.3",
     "moment": "^2.29.1",
     "node-fetch": "^2.6.1",
     "query-string": "^6.14.0"

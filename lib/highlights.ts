@@ -1,30 +1,10 @@
-import { Game, PlayerInfo, Goal, PersonInfo, Playbacks } from './types'
+import { Game, PlayerInfo, Goal, PersonInfo, Item, Epg } from './types'
 
 const getImageUrl = (id: number): String =>
   `http://nhl.bamcontent.com/images/headshots/current/60x60/${id}@2x.jpg`
 
 const findPersonInfo = (id: number, personInfo: PersonInfo[]): PersonInfo =>
   personInfo.find((person) => person?.id === id)
-
-interface Item {
-  guid: String
-  mediastate: String
-  mediaPlaybackId: String
-  mediaFeedType: String
-  callLetters: String
-  eventId: String
-  language: String
-  freeGame: Boolean
-  feedName: String
-  gamePlus: Boolean
-  playbacks: Playbacks[]
-}
-
-interface Epg {
-  title: String
-  platform: String
-  items: Item[]
-}
 
 const getPersonInfo = (roster: any): PersonInfo[] =>
   roster.map(({ person }) => ({
@@ -45,15 +25,15 @@ export const formatGames = (games): Game[] => {
     const homeTeam = game.teams.home.team
     return {
       homeTeam: homeTeam.name,
-      awayTeam: game.teams.away.team.name,
-      homeGoals: game.teams.home.score,
-      awayGoals: game.teams.away.score,
-      homeWin: game.teams.home.score > game.teams.away.score,
-      arena: game.venue.name,
-      date: game.gameDate,
+      awayTeam: game.teams.away.team?.name,
+      homeGoals: game.teams.home?.score,
+      awayGoals: game.teams.away?.score,
+      homeWin: game.teams.home?.score > game.teams.away?.score,
+      arena: game.venue?.name,
+      date: game?.gameDate,
       gameIsFinished,
       requiredOvertime:
-        gameIsFinished && game.linescore.currentPeriodOrdinal !== '3rd',
+        gameIsFinished && game.linescore?.currentPeriodOrdinal !== '3rd',
       stars: getStars(game.decisions, personInfo),
       scorers: getScorers(game.scoringPlays, homeTeam?.id, personInfo),
       url: getHighlightsUrl(game.content.media.epg),

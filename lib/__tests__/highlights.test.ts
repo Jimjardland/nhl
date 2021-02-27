@@ -440,7 +440,17 @@ describe('Highlights', () => {
       {
         title: 'Extended Highlights',
         topicList: '299968858',
-        items: [],
+        items: [
+          {
+            playbacks: [
+              {
+                name: 'HTTP_CLOUD_MOBILE',
+                url:
+                  'https://hlslive-wsczoominwestus.med.nhl.com/publish-hls/1643336/MasterMobile.m3u8',
+              },
+            ],
+          },
+        ],
       },
       {
         title: 'Recap',
@@ -457,7 +467,7 @@ describe('Highlights', () => {
   describe('#getHightlightsUrl', () => {
     it('Returns the correct url', () => {
       expect(getHighlightsUrl(epgs)).toEqual(
-        'https://www.nhl.com/video/embed/c-62111703&autoplay=true'
+        'https://hlslive-wsczoominwestus.med.nhl.com/publish-hls/1643336/MasterMobile.m3u8'
       )
     })
   })
