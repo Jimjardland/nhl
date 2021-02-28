@@ -1,7 +1,7 @@
 import { Game, PlayerInfo, Goal, PersonInfo, Item, Epg } from './types'
 
 const getImageUrl = (id: number): String =>
-  `http://nhl.bamcontent.com/images/headshots/current/60x60/${id}@2x.jpg`
+  `https://cms.nhl.bamgrid.com/images/headshots/current/60x60/${id}@2x.jpg`
 
 const findPersonInfo = (id: number, personInfo: PersonInfo[]): PersonInfo =>
   personInfo.find((person) => person?.id === id)
