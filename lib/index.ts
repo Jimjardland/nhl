@@ -9,7 +9,7 @@ export const getHighlights = async (
   endDate?: string
 ): Promise<Highlights[]> => {
   const params = {
-    startDate: startDate || moment().subtract(1, 'days').format('YYYY-MM-DD'),
+    startDate: startDate || moment().subtract(3, 'days').format('YYYY-MM-DD'),
     endDate: endDate || moment().format('YYYY-MM-DD'),
     leaderCategories: 'points,goals,assists',
     leaderGameTypes: 'R',
@@ -32,9 +32,7 @@ export const getHighlights = async (
     }
   })
 
-  return highlights
+  return highlights.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  )
 }
-
-const abba = async () => console.log(await getHighlights())
-
-abba()
