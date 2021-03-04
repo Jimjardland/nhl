@@ -3,6 +3,9 @@ import { Game, PlayerInfo, Goal, PersonInfo, Item, Epg } from './types'
 const getImageUrl = (id: number): String =>
   `https://cms.nhl.bamgrid.com/images/headshots/current/60x60/${id}@2x.jpg`
 
+const getImageUrlHttp = (id: number): String =>
+  `http://nhl.bamcontent.com/images/headshots/current/60x60/${id}@2x.jpg`
+
 const findPersonInfo = (id: number, personInfo: PersonInfo[]): PersonInfo =>
   personInfo.find((person) => person?.id === id)
 
@@ -48,18 +51,21 @@ const getStars = (stars: any, roster: PersonInfo[]): PlayerInfo[] => {
       ...stars.firstStar,
       position: 1,
       image: getImageUrl(stars.firstStar?.id),
+      imageHttp: getImageUrlHttp(stars.firstStar?.id),
       personInfo: findPersonInfo(stars.firstStar?.id, roster),
     },
     {
       ...stars.secondStar,
       position: 2,
       image: getImageUrl(stars.secondStar?.id),
+      imageHttp: getImageUrlHttp(stars.secondStar?.id),
       personInfo: findPersonInfo(stars.secondStar?.id, roster),
     },
     {
       ...stars.thirdStar,
       position: 3,
       image: getImageUrl(stars.thirdStar?.id),
+      imageHttp: getImageUrlHttp(stars.thirdStar?.id),
       personInfo: findPersonInfo(stars.thirdStar?.id, roster),
     },
   ]

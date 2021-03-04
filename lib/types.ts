@@ -3,11 +3,13 @@ export type PlayerInfo = {
   fullName: string
   position: string
   image: string
+  imageHttp: string
   personInfo: PersonInfo
 }
 
 export type Highlights = {
   day: string
+  date: string
   games: Game[]
 }
 
