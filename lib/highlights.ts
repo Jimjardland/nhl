@@ -37,6 +37,7 @@ export const formatGames = (games): Game[] => {
       gameIsFinished,
       requiredOvertime:
         gameIsFinished && game.linescore?.currentPeriodOrdinal !== '3rd',
+      lastPeriod: game.linescore?.currentPeriodOrdinal,
       stars: getStars(game.decisions, personInfo),
       scorers: getScorers(game.scoringPlays, homeTeam?.id, personInfo),
       url: getHighlightsUrl(game.content.media.epg),

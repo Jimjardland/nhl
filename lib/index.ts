@@ -2,6 +2,7 @@ import * as moment from 'moment'
 import * as queryString from 'query-string'
 import { Highlights } from './types'
 import { formatGames } from './highlights'
+import { getStandings } from './standings'
 import fetch from 'node-fetch'
 
 export const getHighlights = async (
@@ -36,3 +37,5 @@ export const getHighlights = async (
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
 }
+
+export const standings = async () => await getStandings()

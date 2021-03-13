@@ -56,6 +56,7 @@ export type Game = {
   date: string
   gameIsFinished: boolean
   requiredOvertime: boolean
+  lastPeriod: string
   url: string
   stars: [PlayerInfo]
   scorers: [Goal]
