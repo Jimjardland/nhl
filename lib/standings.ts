@@ -22,9 +22,12 @@ export const getStandings = async () : Promise<any> => {
     division: division.name,
     teamRecords: teamRecords.map(post => ({
       team: post.team.name,
+      teamShort: post.team.abbreviation,
       points: post.points,
-      ...post.leagueRecords,
+      ...post.leagueRecord,
       ...post.streak,
+      goalsScored: post.goalsScored,
+      goalsAgainst: post.goalsAgainst,
       gamesPlayed: post.gamesPlayed,
       divisionRank: post.divisionRank,
       leagueRank: post.leagueRank
