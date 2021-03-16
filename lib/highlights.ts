@@ -41,6 +41,11 @@ export const formatGames = (games): Game[] => {
       stars: getStars(game.decisions, personInfo),
       scorers: getScorers(game.scoringPlays, homeTeam?.id, personInfo),
       url: getHighlightsUrl(game.content.media.epg),
+      isLive: game.status.detailedState === 'In Progress',
+      periodInfoLive: {
+        currentPeriod: game.linescore.currentPeriod,
+        currentPeriodTimeRemaining: game.linescore.currentPeriodTimeRemaining
+      }
     }
   })
 }
