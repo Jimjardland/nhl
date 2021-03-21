@@ -60,6 +60,10 @@ export type Game = {
   url: string
   stars: [PlayerInfo]
   scorers: [Goal]
+  periodInfoLive: {
+    currentPeriod: String
+    currentPeriodTimeRemaining: String
+  }
 }
 
 export interface Item {

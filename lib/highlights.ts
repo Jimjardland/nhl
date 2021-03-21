@@ -43,7 +43,7 @@ export const formatGames = (games): Game[] => {
       url: getHighlightsUrl(game.content.media.epg),
       isLive: game.status.detailedState === 'In Progress',
       periodInfoLive: {
-        currentPeriod: game.linescore.currentPeriod,
+        currentPeriod: game.linescore.currentPeriodOrdinal,
         currentPeriodTimeRemaining: game.linescore.currentPeriodTimeRemaining
       }
     }
