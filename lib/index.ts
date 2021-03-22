@@ -43,7 +43,11 @@ export const standings = async () => await getStandings()
 export const getHighlightsAndStandings = async (
   startDate?: string,
   endDate?: string
-): Promise<{highlights: Highlights[], standings: any}> => ({
-  standings: await standings(),
-  highlights: await getHighlights(startDate, endDate)
-})
+): Promise<{highlights: Highlights[], standings: any[]}> => {
+  const [highlights, standings] = await Promise.all([getHighlights(startDate, endDate), getStandings()])
+
+  return {
+    standings,
+    highlights
+  }
+}

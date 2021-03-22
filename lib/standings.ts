@@ -24,6 +24,7 @@ export const getStandings = async () : Promise<any> => {
       team: post.team.name,
       teamShort: post.team.abbreviation,
       points: post.points,
+      pointsPercentage: post.pointsPercentage,
       ...post.leagueRecord,
       ...post.streak,
       goalsScored: post.goalsScored,
