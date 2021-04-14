@@ -58,6 +58,7 @@ export type Game = {
   requiredOvertime: boolean
   lastPeriod: string
   url: string
+  recapUrl: string
   stars: [PlayerInfo]
   scorers: [Goal]
   periodInfoLive: {

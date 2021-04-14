@@ -41,6 +41,7 @@ export const formatGames = (games): Game[] => {
       stars: getStars(game.decisions, personInfo),
       scorers: getScorers(game.scoringPlays, homeTeam?.id, personInfo),
       url: getHighlightsUrl(game.content.media.epg),
+      recapUrl: getRecapUrl(game.content.media.epg),
       isLive: game.status.detailedState === 'In Progress',
       periodInfoLive: {
         currentPeriod: game.linescore.currentPeriodOrdinal,
@@ -118,6 +119,23 @@ export const getHighlightsUrl = (epgs: Epg[]): string => {
 
   if (extendedHighlights.items) {
     const [item] = extendedHighlights.items
+
+    const [playback] =
+      item?.playbacks.filter((a) => a.name === 'HTTP_CLOUD_MOBILE') || []
+
+    return playback?.url
+  }
+
+  return null
+}
+
+export const getRecapUrl = (epgs: Epg[]): string => {
+  const [recap] = epgs.filter(
+    (x) => x.title === 'Recap'
+  )
+
+  if (recap.items) {
+    const [item] = recap.items
 
     const [playback] =
       item?.playbacks.filter((a) => a.name === 'HTTP_CLOUD_MOBILE') || []
